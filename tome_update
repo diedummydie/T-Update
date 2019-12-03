@@ -1,0 +1,88 @@
+#!/bin/bash
+# rem | sed -e 's/^0\+//'
+
+# Initialize
+f_temp="${HOME}/tome_update_temp"
+f_app="/Applications/T-Engine.app"
+f_ver="${f_app}/Contents/Resources/game/engines"
+f_app_addons="${f_app}/Contents/Resources/game/addons"
+blue="tput setaf 111"
+init="tput init"
+if [ ! -d $f_temp ]; then
+    mkdir $f_temp
+fi
+set -e
+
+# Locate
+printf "$($blue)\nFinding latest release...\n$($init)"
+r_url=':\/\/te4\.org\/dl\/t-engine\/t-engine4-osx-[0-9]+\.[0-9]+\.[0-9]+\.zip'
+curl -o ${f_temp}/releases "https://te4.org/download"
+link=$(cat ${f_temp}/releases | grep -o -E $r_url | head -1)
+# site gives http links but error 301 unless changed to https
+link="https${link}"
+printf "Found: $link\n"
+
+# Compare
+r_ver='[0-9]+\.[0-9]+\.[0-9]+'
+local_ver=$(ls "$f_ver" | grep -o -E $r_ver | head -1)
+remote_ver=$(echo "$link" | grep -o -E $r_ver | head -1)
+if [ "$local_ver" == "" ]; then
+    local_ver="None"
+fi
+printf "Installed: $local_ver \n"
+printf "Available: $remote_ver \n"
+if [ "$local_ver" == "$remote_ver" ]; then
+    printf "$($blue)Your installation is current.\n\n$($init)"
+    exit 0
+else
+    printf "\n"
+fi
+
+# Download
+f_zip="${f_temp}/tome_${remote_ver}.zip"
+if [ -f $f_zip ]; then
+    printf "$($blue)Found local update file...\n$($init)"
+    printf "Using: $f_zip\n"
+else
+    printf "$($blue)Downloading update...\n$($init)"
+    curl -o $f_zip $link
+    printf "Saved: $f_zip\n\n"
+fi
+
+# Update
+
+printf "Backing up addons...\n"
+if [ ! -d $f_app_addons ]; then
+    printf "No addons found...\n"
+else
+    yes | cp "${f_app_addons}/"*.tea* "${f_temp}/"
+    printf "Done\n"
+fi
+
+printf "Extracting ToME ${remote_ver}...\n"
+rm -rf "${f_temp}/T-Engine.app"
+unzip -oq $f_zip -d $f_temp
+if [ ! -d "${f_temp}/T-Engine.app" ]; then
+    printf "Error extracting archive\n\n"
+    exit 1
+fi
+printf "Done\n"
+
+printf "Moving T-Engine to Applications...\n"
+rm -rf "$f_app"
+mv "${f_temp}/T-Engine.app" /Applications
+printf "Done\n"
+
+if [ -f "${f_temp}/"*.tea* ]; then
+    printf "Restoring addons...\n"
+    mv -n "${f_temp}/"*.tea* "${f_app_addons}/"
+    rm "${f_temp}/"*.tea*
+    printf "Done\n"
+fi
+
+printf "Removing temporary files..."
+rm -rf "$f_temp"
+printf "Done\n"
+
+printf "$($blue)\nUpdate completed. $($init)\n"
+
