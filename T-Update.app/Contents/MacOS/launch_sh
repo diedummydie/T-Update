@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Initialize
+f_this_script=$(cd "$(dirname "$0")"; pwd)
+f_updater="${f_this_script}/../Resources/tome_update"
+open -a Terminal $f_updater

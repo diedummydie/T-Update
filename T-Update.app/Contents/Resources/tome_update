@@ -6,12 +6,13 @@ f_temp="${HOME}/tome_update_temp"
 f_app="/Applications/T-Engine.app"
 f_ver="${f_app}/Contents/Resources/game/engines"
 f_app_addons="${f_app}/Contents/Resources/game/addons"
-blue="tput setaf 111"
+blue="tput setaf 004"
 init="tput init"
 if [ ! -d $f_temp ]; then
     mkdir $f_temp
 fi
 set -e
+clear
 
 # Locate
 printf "$($blue)\nFinding latest release...\n$($init)"
@@ -85,4 +86,4 @@ rm -rf "$f_temp"
 printf "Done\n"
 
 printf "$($blue)\nUpdate completed. $($init)\n"
-
+exit 0
