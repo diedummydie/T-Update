@@ -6,7 +6,7 @@ f_temp="${HOME}/tome_update_temp"
 f_app="/Applications/T-Engine.app"
 f_ver="${f_app}/Contents/Resources/game/engines"
 f_app_addons="${f_app}/Contents/Resources/game/addons"
-blue="tput setaf 002"
+em="tput setaf 002"
 init="tput init"
 init="tput setaf 239"
 if [ ! -d $f_temp ]; then
@@ -16,7 +16,7 @@ set -e
 clear
 
 # Locate
-printf "$($blue)\nFinding latest release...\n$($init)"
+printf "$($em)\nFinding latest release...\n$($init)"
 r_url=':\/\/te4\.org\/dl\/t-engine\/t-engine4-osx-[0-9]+\.[0-9]+\.[0-9]+\.zip'
 curl -o ${f_temp}/releases "https://te4.org/download"
 link=$(cat ${f_temp}/releases | grep -o -E $r_url | head -1)
@@ -34,7 +34,7 @@ fi
 printf "Installed: $local_ver \n"
 printf "Available: $remote_ver \n"
 if [ "$local_ver" == "$remote_ver" ]; then
-    printf "$($blue)Your installation is current.\n\n$($init)"
+    printf "$($em)Your installation is current.\n\n$($init)"
     exit 0
 else
     printf "\n"
@@ -43,10 +43,10 @@ fi
 # Download
 f_zip="${f_temp}/tome_${remote_ver}.zip"
 if [ -f $f_zip ]; then
-    printf "$($blue)Found local update file...\n$($init)"
+    printf "$($em)Found local update file...\n$($init)"
     printf "Using: $f_zip\n"
 else
-    printf "$($blue)Downloading update...\n$($init)"
+    printf "$($em)Downloading update...\n$($init)"
     curl -o $f_zip $link
     printf "Saved: $f_zip\n\n"
 fi
@@ -79,5 +79,5 @@ rm "${f_temp}/"*.tea*
 printf "Removing temporary files...\n"
 rm -rf "$f_temp"
 
-printf "$($blue)\nUpdate completed. $($init)\n"
+printf "$($em)\nUpdate completed. $($init)\n"
 exit 0
