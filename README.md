@@ -1,2 +1,2 @@
 # T-Update
-Installer and updater for Tales of Maj'Eyal
+Unofficial ToME Updater (non-Steam macOS)
