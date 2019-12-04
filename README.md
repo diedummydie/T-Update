@@ -20,8 +20,8 @@ This tool gets ToME updates directly from <https://te4.org>, and doesn't alter t
 
 ![vim](https://github.com/diedummydie/ToME-Update/blob/master/etc/vim.png)
 
-If you'd like to see how it works, the core functionality is in [this file](https://github.com/diedummydie/ToME-Update/blob/master/T-Update.app/Contents/Resources/tome_update). In fact, if you enjoy working in the Terminal, that file is all you need. It uses absolute paths, so you can put it in `/usr/local/bin`, $HOME, or wherever you want. Just `chmod +x` it to make it executable. If you don't put it somewhere in your $PATH, remember to prepend it with dot-slash so your shell knows to look for it in the current folder (`./tome_update`).
+If you'd like to see how it works, the core functionality is in [this file](https://github.com/diedummydie/ToME-Update/blob/master/T-Update.app/Contents/Resources/tome_update). In fact, if you enjoy working in the Terminal, that file is all you need. It uses absolute paths, so you can put it in `/usr/local/bin`, `$HOME`, or wherever you want. Just `chmod +x` it to make it executable. If you don't put it somewhere in your `$PATH`, remember to prepend it with dot-slash so your shell knows to look for it in the current folder (`./tome_update`).
 
 ### Disclaimer
 
-This is an unofficial project created by a fan and not affiliated with [DarkGod](https://www.patreon.com/darkgodone). The program is provided "as-is" without warranty of any kind.
+This is an unofficial, fan-made project, not affiliated with [DarkGod](https://www.patreon.com/darkgodone), the creator of ToME and T-Engine. The program is provided "as-is" without warranty of any kind.
