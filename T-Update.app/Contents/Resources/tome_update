@@ -6,8 +6,9 @@ f_temp="${HOME}/tome_update_temp"
 f_app="/Applications/T-Engine.app"
 f_ver="${f_app}/Contents/Resources/game/engines"
 f_app_addons="${f_app}/Contents/Resources/game/addons"
-blue="tput setaf 004"
+blue="tput setaf 002"
 init="tput init"
+init="tput setaf 239"
 if [ ! -d $f_temp ]; then
     mkdir $f_temp
 fi
@@ -57,7 +58,6 @@ if [ ! -d $f_app_addons ]; then
     printf "No addons found...\n"
 else
     yes | cp "${f_app_addons}/"*.tea* "${f_temp}/"
-    printf "Done\n"
 fi
 
 printf "Extracting ToME ${remote_ver}...\n"
@@ -67,23 +67,17 @@ if [ ! -d "${f_temp}/T-Engine.app" ]; then
     printf "Error extracting archive\n\n"
     exit 1
 fi
-printf "Done\n"
 
 printf "Moving T-Engine to Applications...\n"
 rm -rf "$f_app"
 mv "${f_temp}/T-Engine.app" /Applications
-printf "Done\n"
 
-if [ -f "${f_temp}/"*.tea* ]; then
-    printf "Restoring addons...\n"
-    mv -n "${f_temp}/"*.tea* "${f_app_addons}/"
-    rm "${f_temp}/"*.tea*
-    printf "Done\n"
-fi
+printf "Restoring addons...\n"
+mv -n "${f_temp}/"*.tea* "${f_app_addons}/"
+rm "${f_temp}/"*.tea*
 
-printf "Removing temporary files..."
+printf "Removing temporary files...\n"
 rm -rf "$f_temp"
-printf "Done\n"
 
 printf "$($blue)\nUpdate completed. $($init)\n"
 exit 0
