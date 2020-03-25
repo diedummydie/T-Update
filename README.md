@@ -5,6 +5,8 @@ This is an unofficial [Tales of Maj'Eyal](https://te4.org) updater for the non-S
 [Click here to **Download**](https://github.com/diedummydie/ToME-Update/releases/download/1.0/ToME-Update.dmg). Open the file, then drag and drop to install.
 ![Installation](https://github.com/diedummydie/ToME-Update/blob/master/etc/dmg.png)
 
+*Note: This updater does one thing simply and quickly. It worked with the 1.6.6 release in January, 1.6.7 in Feb., and will continue with no need for changes until the te4 site undergoes a major redesign.*
+
 It stays next to the game for quick access.
 ![T-Engine and T-Update icons](https://github.com/diedummydie/ToME-Update/blob/master/etc/icon.png)
 
